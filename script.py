@@ -15,9 +15,12 @@ for url in urls:
 
     # Encuentra y guarda los enlaces a las noticias. Ajusta este código según la estructura del sitio.
     for enlace in soup.find_all("a"):  # Ajusta el selector según sea necesario
+        href = enlace.get("href")
+        if not href:
+            continue
         titulo = enlace.get_text().strip()
         if any(palabra in titulo.lower() for palabra in ["crypto", "ethereum", "bitcoin", "solana"]):
-            enlaces_noticias.append(enlace['href'])  # Asegúrate de que 'href' es el atributo correcto
+            enlaces_noticias.append(href)  # Asegúrate de que 'href' es el atributo correcto
 
     if len(enlaces_noticias) >= 30:
         break
